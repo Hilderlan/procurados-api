@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+from fastapi import FastAPI
 
+# Scrapping
 req = requests.get('https://www.novo.justica.gov.br/procurados/capa_interna')
 
 if req.status_code == 200:
@@ -33,4 +35,11 @@ for procurado in procurados:
 
 dict['data'] = data
 
-print(dict)
+# print(dict)
+
+# API
+app = FastAPI()
+
+@app.get('/')
+def getAllProcurados():
+  return dict
